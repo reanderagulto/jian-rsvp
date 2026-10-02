@@ -1,23 +1,20 @@
 "use client";
 import { useCountdown } from "@/lib/useCountdown";
-import type { Settings } from "@/lib/supabase";
+import { type Settings, assetUrl } from "@/lib/supabase";
 export default function Hero({ s }: { s: Settings }) {
   const cd = useCountdown(s.eventDate);
   return (
-    <header
-      id="home"
-      className="pt-32 pb-16 px-4 max-w-5xl mx-auto text-center"
-    >
+    <header className="pt-24 md:pt-32 pb-16 px-4 max-w-5xl mx-auto text-center">
       <p className="font-serif italic text-xl text-slate-soft mb-2">
         With grateful hearts, we invite you to celebrate…
       </p>
       <h1 className="heading text-5xl sm:text-7xl mb-4">{s.babyName}</h1>
-      <p className="eyebrow mb-6">Dedication &amp; 1st Birthday</p>
+      <p className="eyebrow mb-6">Dedication Ceremony</p>
       <div className="w-52 h-64 rounded-t-full rounded-b-2xl p-2 bg-gradient-to-b from-gold-accent via-champagne to-powder-blue shadow-xl mx-auto overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&q=80&w=800"
-          alt="Baby Liam"
+          src={assetUrl(s.heroPhoto)}
+          alt={`Photo of ${s.babyName}`}
           className="w-full h-full object-cover rounded-t-full rounded-b-xl"
         />
       </div>

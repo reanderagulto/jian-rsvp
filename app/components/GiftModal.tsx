@@ -25,7 +25,7 @@ export default function GiftModal({
     alert(
       error
         ? "Sorry, that item was just covered. Please pick another."
-        : `Thank you ${f.get("name")}! Your gift is reserved for Liam.`,
+        : `Thank you ${f.get("name")}! Your gift is reserved for ${s.babyName}.`,
     );
     onClose();
     onReserved();
