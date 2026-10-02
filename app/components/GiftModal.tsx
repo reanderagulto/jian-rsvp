@@ -1,14 +1,16 @@
 "use client";
 import { useState } from "react";
-import { supabase, type Item } from "@/lib/supabase";
+import { supabase, type Item, type Settings } from "@/lib/supabase";
 export default function GiftModal({
   item,
   onClose,
   onReserved,
+  babyName,
 }: {
   item: Item;
   onClose: () => void;
   onReserved: () => void;
+  babyName: string;
 }) {
   const [qty, setQty] = useState(1);
   const left = item.needed - item.covered;
@@ -25,7 +27,7 @@ export default function GiftModal({
     alert(
       error
         ? "Sorry, that item was just covered. Please pick another."
-        : `Thank you ${f.get("name")}! Your gift is reserved for ${s.babyName}.`,
+        : `Thank you ${f.get("name")}! Your gift is reserved for ${babyName}.`,
     );
     onClose();
     onReserved();

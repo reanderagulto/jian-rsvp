@@ -127,6 +127,7 @@ export default function Registry({
             item={giftItem}
             onClose={() => setGiftItem(null)}
             onReserved={onReserved}
+            babyName={s.babyName}
           />
         )}
       </div>
