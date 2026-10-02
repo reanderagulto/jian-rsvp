@@ -60,3 +60,8 @@ export type Run = (
 ) => Promise<void>;
 export const galleryUrl = (path: string) =>
   supabase.storage.from("gallery").getPublicUrl(path).data.publicUrl;
+
+export const assetUrl = (path?: string | null) =>
+  path
+    ? supabase.storage.from("site-assets").getPublicUrl(path).data.publicUrl
+    : undefined;

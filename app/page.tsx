@@ -45,7 +45,7 @@ export default function Home() {
 
   return (
     <>
-      <Navbar />
+      <Navbar s={s} hasGallery={images.length > 0} />
       <Hero s={s} />
       <EventDetails s={s} />
       <Gallery images={images} s={s} />

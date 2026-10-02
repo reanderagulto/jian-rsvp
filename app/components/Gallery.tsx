@@ -40,7 +40,7 @@ export default function Gallery({
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={g.url}
-                alt={`Liam photo ${i + 1}`}
+                alt={`${s.babyName} photo ${i + 1}`}
                 loading="lazy"
                 className="w-full h-full object-cover rounded-[1.3rem]"
               />
