@@ -19,7 +19,7 @@ export const revalidate = 60; // re-check settings at most once a minute
 
 export async function generateMetadata(): Promise<Metadata> {
   const base: Metadata = {
-    title: "Liam's 1st Birthday & Dedication Celebration",
+    title: "Jian Enoch's Dedication Celebration",
   };
   try {
     const sb = createClient(
