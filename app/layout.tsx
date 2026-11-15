@@ -1,19 +1,9 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Plus_Jakarta_Sans } from "next/font/google";
 import { createClient } from "@supabase/supabase-js";
+import "@fontsource-variable/cormorant-garamond";
+import "@fontsource-variable/cormorant-garamond/wght-italic.css";
+import "@fontsource-variable/plus-jakarta-sans";
 import "./globals.css";
-
-const serif = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  style: ["normal", "italic"],
-  variable: "--font-serif",
-});
-const sans = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-sans",
-});
 
 export const revalidate = 60; // re-check settings at most once a minute
 
@@ -47,10 +37,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      className={`${serif.variable} ${sans.variable} scroll-smooth`}
-    >
+    <html lang="en" className="scroll-smooth">
       <body className="min-h-screen">{children}</body>
     </html>
   );
