@@ -1,6 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+:root {
+  --font-serif: "Cormorant Garamond Variable";
+  --font-sans: "Plus Jakarta Sans Variable";
+}
 body {
   @apply bg-ivory text-deep-blue font-sans antialiased;
   overflow-x: hidden;
