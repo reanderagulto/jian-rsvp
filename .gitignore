@@ -2,4 +2,5 @@
 .env.*.local
 node_modules
 public/images/*
+!public/images/registry-placeholder.svg
 public/uploads/*

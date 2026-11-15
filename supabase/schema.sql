@@ -4,7 +4,8 @@ create table rsvps (id uuid primary key default gen_random_uuid(), name text not
   attending boolean not null, headcount int not null default 1, companions text[] default '{}', dietary text default 'Standard',
   notes text, created_at timestamptz default now());
 create table wishlist_items (id uuid primary key default gen_random_uuid(), name text not null, category text not null,
-  description text, price_range text, needed int not null default 1, covered int not null default 0, image_url text, created_at timestamptz default now());
+  description text, price_range text, shop_link text, needed int not null default 1, covered int not null default 0, image_url text, created_at timestamptz default now());
+alter table wishlist_items add column if not exists shop_link text;
 create table gift_claims (id uuid primary key default gen_random_uuid(), item_id uuid references wishlist_items on delete cascade,
   guest_name text not null, contact text not null, qty int not null, note text, created_at timestamptz default now());
 create table messages (id uuid primary key default gen_random_uuid(), sender text not null, body text not null,
