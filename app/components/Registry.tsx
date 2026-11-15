@@ -2,6 +2,9 @@
 import { useState } from "react";
 import { CATEGORIES, type Item, type Settings } from "@/lib/supabase";
 import GiftModal from "./GiftModal";
+
+const DEFAULT_ITEM_IMAGE = "/images/registry-placeholder.svg";
+
 export default function Registry({
   items,
   s,
@@ -42,53 +45,65 @@ export default function Registry({
           ))}
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
-          {shown.map((i) => (
-            <div
-              key={i.id}
-              className="glass rounded-3xl overflow-hidden flex flex-col"
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              {i.image_url && (
+          {shown.map((i) => {
+            const imageUrl =
+              i.image_url?.includes(
+                "/storage/v1/object/public/site-assets/registry/",
+              )
+                ? i.image_url
+                : DEFAULT_ITEM_IMAGE;
+
+            return (
+              <div
+                key={i.id}
+                className="glass rounded-3xl overflow-hidden flex flex-col"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={i.image_url}
+                  src={imageUrl}
                   alt={i.name}
                   className="h-44 w-full object-cover"
                 />
-              )}
-              <div className="p-6 flex-1">
-                <h3 className="heading text-xl">{i.name}</h3>
-                <p className="text-xs text-slate-soft my-2">{i.description}</p>
-                <div className="flex justify-between text-xs font-semibold mb-2">
-                  <span>{i.price_range}</span>
-                  <span className="text-gold-accent">
-                    {i.covered} of {i.needed} covered
-                  </span>
+                <div className="p-6 flex-1">
+                  <h3 className="heading text-xl">{i.name}</h3>
+                  <p className="text-xs text-slate-soft my-2">
+                    {i.description}
+                  </p>
+                  <div className="flex justify-between text-xs font-semibold mb-2">
+                    <span>{i.price_range}</span>
+                    <span className="text-gold-accent">
+                      {i.covered} of {i.needed} covered
+                    </span>
+                  </div>
+                  <div className="h-2 rounded-full bg-powder-light overflow-hidden">
+                    <div
+                      className="h-full bg-gold-accent"
+                      style={{
+                        width: `${Math.min(100, (i.covered / i.needed) * 100)}%`,
+                      }}
+                    />
+                  </div>
                 </div>
-                <div className="h-2 rounded-full bg-powder-light overflow-hidden">
-                  <div
-                    className="h-full bg-gold-accent"
-                    style={{
-                      width: `${Math.min(100, (i.covered / i.needed) * 100)}%`,
-                    }}
-                  />
+                <div className="p-6 pt-0">
+                  {i.covered >= i.needed ? (
+                    <button
+                      disabled
+                      className="btn-soft w-full py-3 rounded-full"
+                    >
+                      All covered. Thank you!
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => setGiftItem(i)}
+                      className="btn w-full"
+                    >
+                      I&apos;d like to give this
+                    </button>
+                  )}
                 </div>
               </div>
-              <div className="p-6 pt-0">
-                {i.covered >= i.needed ? (
-                  <button
-                    disabled
-                    className="btn-soft w-full py-3 rounded-full"
-                  >
-                    All covered. Thank you!
-                  </button>
-                ) : (
-                  <button onClick={() => setGiftItem(i)} className="btn w-full">
-                    I&apos;d like to give this
-                  </button>
-                )}
-              </div>
-            </div>
-          ))}
+            );
+          })}
           {!shown.length && (
             <p className="col-span-full text-center text-sm text-slate-soft">
               No items in this category yet.

@@ -71,11 +71,13 @@ export default function Admin() {
   };
   const run: Run = async (p, ok) => {
     const { error } = await p;
-    if (error) say(error.message);
-    else {
-      if (ok) say(ok);
-      load();
+    if (error) {
+      say(error.message);
+      return false;
     }
+    if (ok) say(ok);
+    load();
+    return true;
   };
   async function logout() {
     await supabase.auth.signOut();

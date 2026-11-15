@@ -10,6 +10,7 @@ export type Item = {
   category: string;
   description: string | null;
   price_range: string | null;
+  shop_link: string | null;
   needed: number;
   covered: number;
   image_url: string | null;
@@ -57,7 +58,7 @@ export type GalleryImage = {
 export type Run = (
   p: PromiseLike<{ error: { message: string } | null }>,
   ok?: string,
-) => Promise<void>;
+) => Promise<boolean>;
 export const galleryUrl = (path: string) =>
   supabase.storage.from("gallery").getPublicUrl(path).data.publicUrl;
 
